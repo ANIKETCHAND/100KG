@@ -1,12 +1,12 @@
 # 🧠 Business Logic & Core Algorithms Specification
-## FitTrack — Performance Calculations & Telemetry Algorithms
+## 100KG — Performance Calculations & Telemetry Algorithms
 **Smart India Hackathon 2026 (SIH 2026)**
 
 ---
 
 ## 1. Biometric Calibration Engine
 
-FitTrack calculates baseline metabolic energy expenditure using the clinically validated **Mifflin-St Jeor Equations**, adjusted for biological sex, body mass, height, and age.
+100KG calculates baseline metabolic energy expenditure using the clinically validated **Mifflin-St Jeor Equations**, adjusted for biological sex, body mass, height, and age.
 
 ### 1.1 Basal Metabolic Rate (BMR)
 $$\text{BMR}_{\text{male}} = (10 \times m_{\text{kg}}) + (6.25 \times h_{\text{cm}}) - (5 \times a_{\text{years}}) + 5$$
@@ -103,7 +103,7 @@ $$c = 2 \cdot \text{atan2}\left(\sqrt{a}, \sqrt{1-a}\right)$$
 $$d = R_{\text{earth}} \cdot c \quad (R_{\text{earth}} \approx 6,371\text{ km})$$
 
 ### 4.2 Noise Suppression & Velocity Gating
-Smartphone GPS sensors frequently experience multi-path reflection errors. FitTrack suppresses noise using velocity threshold gating:
+Smartphone GPS sensors frequently experience multi-path reflection errors. 100KG suppresses noise using velocity threshold gating:
 1. If positional accuracy uncertainty is $> 25\text{ meters}$, coordinate point is discarded.
 2. If instantaneous calculated speed $v = \frac{\Delta d}{\Delta t} > 35\text{ km/h}$ ($9.72\text{ m/s}$) for running sessions, coordinate point is tagged as anomalous GPS drift and rejected.
 

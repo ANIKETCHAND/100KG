@@ -1,13 +1,13 @@
 # 📄 Product Requirements Document (PRD)
-## FitTrack — Intelligent Athletic Performance Operating System
+## 100KG — Intelligent Athletic Performance Operating System
 **Smart India Hackathon 2026 (SIH 2026) Submission**
 
 ---
 
 ## 1. Document Overview
-* **Product Name**: FitTrack Performance OS
+* **Product Name**: 100KG Performance OS
 * **Version**: 2.0.0 (Production Release)
-* **Author / Team**: FitTrack Engineering Team (SIH 2026)
+* **Author / Team**: 100KG Engineering Team (SIH 2026)
 * **Status**: Pre-Hackathon Phase (Undeployed in compliance with competition guidelines; local build verified)
 * **Target Audience**: Indian fitness enthusiasts, students, athletes, desk workers, and gym-goers combating sedentary lifestyles.
 
@@ -24,7 +24,7 @@
 ---
 
 ## 3. Product Vision & Value Proposition
-FitTrack is an all-in-one, browser-first, cloud-synchronized **Athletic Performance Operating System**. It democratizes elite-tier sports telemetry, biomechanics guidance, and personalized nutrition through:
+100KG is an all-in-one, browser-first, cloud-synchronized **Athletic Performance Operating System**. It democratizes elite-tier sports telemetry, biomechanics guidance, and personalized nutrition through:
 * **Interactive 3D Anatomy & Muscle Recovery Studio**: Visualizing muscle fatigue and readiness in full WebGL 3D without expensive proprietary hardware.
 * **Localized Smart Nutrition Lab**: Tracking regional Indian culinary items alongside raw pantry ingredients with automated Mifflin-St Jeor BMR/TDEE calibrations.
 * **Rexi AI Conversational Coach**: An always-available multimodal AI fitness mentor (powered by Google Gemini 1.5 Flash) grounded in real-time athlete biometrics.
@@ -36,7 +36,7 @@ FitTrack is an all-in-one, browser-first, cloud-synchronized **Athletic Performa
 
 ## 4. User Personas
 
-| Persona | Demographics & Context | Pain Points | FitTrack Solution |
+| Persona | Demographics & Context | Pain Points | 100KG Solution |
 | :--- | :--- | :--- | :--- |
 | **Aarav (The College Beginner)** | 20 yrs, University Student, Tier-2 City | Confused by gym equipment; cannot afford personal trainers; intimidates easily. | Beginner Mode, step-by-step 3D muscle cues, and slow-motion video form guides. |
 | **Pooja (The Urban Professional)** | 27 yrs, Software Engineer, Bengaluru | Sits 10+ hours a day; suffers postural fatigue; eats home-cooked Indian meals. | Instant Indian food macro breakdown, 3D postural recovery tracking, and adaptive quick workouts. |

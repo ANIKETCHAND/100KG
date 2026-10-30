@@ -1,12 +1,12 @@
 # 🏛️ System Architecture Document
-## FitTrack — Performance Operating System
+## 100KG — Performance Operating System
 **Smart India Hackathon 2026 (SIH 2026)**
 
 ---
 
 ## 1. High-Level Architecture Overview
 
-FitTrack is designed as a **modern, cloud-native, offline-resilient Single Page Application (SPA)** that combines client-side high-speed computing with cloud serverless elasticity and generative AI inference.
+100KG is designed as a **modern, cloud-native, offline-resilient Single Page Application (SPA)** that combines client-side high-speed computing with cloud serverless elasticity and generative AI inference.
 
 ```mermaid
 graph TD
@@ -75,7 +75,7 @@ graph TD
 sequenceDiagram
     autonumber
     actor Athlete as Athlete (User)
-    participant UI as FitTrack Interface
+    participant UI as 100KG Interface
     participant Telemetry as Telemetry Aggregator
     participant Rexi as Rexi Context Engine
     participant Gemini as Google Gemini 1.5 Flash

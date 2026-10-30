@@ -1,5 +1,5 @@
 # 💻 Technology Stack & Engineering Specifications
-## FitTrack — Production Tech Stack
+## 100KG — Production Tech Stack
 **Smart India Hackathon 2026 (SIH 2026)**
 
 ---
@@ -50,7 +50,7 @@
 * **Multimodal Context Window**: Handles expansive context containing the user's complete daily nutritional ledger, 7-day workout history, and physiological goals.
 
 ### 2.4 Why Web Standards / PWA over Native Mobile Apps?
-* **Zero App Store Gatekeeping**: Users can start using FitTrack immediately without waiting to download 150 MB APKs from Google Play or Apple App Store.
+* **Zero App Store Gatekeeping**: Users can start using 100KG immediately without waiting to download 150 MB APKs from Google Play or Apple App Store.
 * **Sensor Parity**: Modern Web APIs (HTML5 Geolocation, Web Crypto, WebGL, Speech Recognition, LocalStorage) provide 100% of the sensors needed for fitness telemetry.
 * **Cross-Device Continuity**: The exact same codebase runs flawlessly on budget Android phones, iPhones, iPads, MacBooks, and Windows PCs.
 

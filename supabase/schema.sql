@@ -1,5 +1,5 @@
 -- ==============================================================================
--- FitTrack: Enterprise-Grade Supabase PostgreSQL Schema
+-- 100KG: Enterprise-Grade Supabase PostgreSQL Schema
 -- Run this script in your Supabase Project SQL Editor to set up all tables,
 -- indexes, and Row Level Security (RLS) policies.
 -- ==============================================================================

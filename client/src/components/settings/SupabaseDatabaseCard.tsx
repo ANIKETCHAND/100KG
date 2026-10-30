@@ -94,7 +94,7 @@ export function SupabaseDatabaseCard() {
   };
 
   const handleCopySql = () => {
-    const sqlScript = `-- FitTrack: Supabase PostgreSQL Schema
+    const sqlScript = `-- 100KG: Supabase PostgreSQL Schema
 -- Run this in your Supabase SQL Editor:
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 

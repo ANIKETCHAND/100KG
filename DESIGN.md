@@ -1,12 +1,12 @@
 # 🎨 Design System & UI/UX Specification
-## FitTrack — Carbon Editorial Performance Deck
+## 100KG — Carbon Editorial Performance Deck
 **Smart India Hackathon 2026 (SIH 2026)**
 
 ---
 
 ## 1. Design Philosophy: "Carbon Editorial Performance Deck"
 
-FitTrack breaks away from generic, sterile white fitness apps. It is engineered with an **editorial, dark-mode sports telemetry design system**:
+100KG breaks away from generic, sterile white fitness apps. It is engineered with an **editorial, dark-mode sports telemetry design system**:
 * **OLED-Optimized Immersion**: Deep charcoal, slate, and obsidian backgrounds reduce battery drain and prevent eye strain in dimly lit gym weight rooms.
 * **Kinetic High-Contrast Accents**: Electric lime (`#C6FF3D`) and cyber cyan (`#38BDF8`) highlight active muscle regions, readiness scores, and streaks.
 * **Information Density with Breathing Room**: Telemetry cards are organized using clear visual hierarchies, typography pairing, and subtle borders rather than heavy container drop-shadows.
@@ -50,7 +50,7 @@ FitTrack breaks away from generic, sterile white fitness apps. It is engineered 
 
 | Style / Role | Font Family | Weight | Tracking / Transform | Example Application |
 | :--- | :--- | :--- | :--- | :--- |
-| **Brand Display** | `Chakra Petch`, sans-serif | 700 / Bold | Uppercase, wide tracking | `"FITTRACK"`, `"GOOD MORNING"` |
+| **Brand Display** | `Chakra Petch`, sans-serif | 700 / Bold | Uppercase, wide tracking | `"100KG"`, `"GOOD MORNING"` |
 | **Section Eyebrows** | `Space Mono`, monospace | 500 / Medium | Uppercase, `tracking-widest` | `"TRAINING RHYTHM"`, `"RECOVERY MAP"` |
 | **Body & Labels** | `Inter`, -apple-system, sans-serif | 400 / 600 | Normal | Movement descriptions, meal ingredients |
 | **Numerical Telemetry**| `Space Mono`, monospace | 700 / Bold | Monospaced tabular figures | `"82.5 kg"`, `"2,200 kcal"`, `"04:32 min/km"` |

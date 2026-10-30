@@ -23,5 +23,5 @@ export function exportBadgeCertificate(achievement: Achievement) {
   ctx.font = "16px monospace"; ctx.fillStyle = smoke; ctx.fillText("REWARD", 148, 570); ctx.fillText("ACHIEVEMENT VALUE", 530, 570); ctx.fillText("ARCHIVE STATUS", 1030, 570);
   ctx.font = "bold 35px sans-serif"; ctx.fillStyle = bone; ctx.fillText(achievement.reward.toUpperCase(), 148, 626); ctx.fillText(`${achievement.progress.toLocaleString()} / ${achievement.target.toLocaleString()}`, 530, 626); ctx.fillStyle = lime; ctx.fillText("UNLOCKED", 1030, 626);
   ctx.font = "16px monospace"; ctx.fillStyle = smoke; ctx.fillText("TRAIN THE SYSTEM. SEE THE SIGNAL.", 104, 773); ctx.fillText(`ISSUED · ${new Date().toLocaleDateString().toUpperCase()}`, 1120, 773);
-  canvas.toBlob((blob) => { if (!blob) return; const url = URL.createObjectURL(blob); const anchor = document.createElement("a"); anchor.href = url; anchor.download = `fittrack-${achievement.id}-certificate.png`; anchor.click(); URL.revokeObjectURL(url); }, "image/png");
+  canvas.toBlob((blob) => { if (!blob) return; const url = URL.createObjectURL(blob); const anchor = document.createElement("a"); anchor.href = url; anchor.download = `100kg-${achievement.id}-certificate.png`; anchor.click(); URL.revokeObjectURL(url); }, "image/png");
 }

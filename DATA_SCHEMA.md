@@ -1,12 +1,12 @@
 # 🗄️ Database Schema & Storage Architecture
-## FitTrack — PostgreSQL 15 & LocalStorage Engine
+## 100KG — PostgreSQL 15 & LocalStorage Engine
 **Smart India Hackathon 2026 (SIH 2026)**
 
 ---
 
 ## 1. Architecture Overview
 
-FitTrack employs a **hybrid storage architecture**:
+100KG employs a **hybrid storage architecture**:
 1. **Cloud Persistent Layer**: **PostgreSQL 15** hosted on Supabase with strict **Row-Level Security (RLS)**, ensuring complete multi-tenant athlete isolation.
 2. **Edge Client Storage Layer**: Namespace-scoped browser `localStorage` ensuring instant zero-latency UI rendering and offline-first availability.
 

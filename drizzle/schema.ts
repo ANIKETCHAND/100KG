@@ -1,4 +1,4 @@
-/* FitTrack: Comprehensive Enterprise-Grade Database Schema */
+/* 100KG: Comprehensive Enterprise-Grade Database Schema */
 import { decimal, index, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 /**

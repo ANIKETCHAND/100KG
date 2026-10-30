@@ -59,7 +59,7 @@ export function exportAthleteDatabase(): void {
     const downloadAnchor = document.createElement("a");
     downloadAnchor.setAttribute("href", dataStr);
     const dateStr = new Date().toISOString().split("T")[0];
-    downloadAnchor.setAttribute("download", `FitTrack_Backup_${dateStr}.json`);
+    downloadAnchor.setAttribute("download", `100KG_Backup_${dateStr}.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
@@ -89,7 +89,7 @@ export function exportWorkoutCsv(): void {
     const downloadAnchor = document.createElement("a");
     downloadAnchor.setAttribute("href", dataStr);
     const dateStr = new Date().toISOString().split("T")[0];
-    downloadAnchor.setAttribute("download", `FitTrack_Workouts_${dateStr}.csv`);
+    downloadAnchor.setAttribute("download", `100KG_Workouts_${dateStr}.csv`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
