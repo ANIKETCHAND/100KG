@@ -32,7 +32,7 @@ app.use(
 
 // 5. Health check endpoint (explicitly typed)
 app.get("/api/health", (_req: any, res: any) => {
-  res.json({ ok: true, service: "fittrack-api", timestamp: new Date().toISOString() });
+  res.json({ ok: true, service: "100kg-api", timestamp: new Date().toISOString() });
 });
 
 // 6. Global error handler: prevent stack trace exposure in responses

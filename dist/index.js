@@ -227,7 +227,7 @@ async function upsertUser(user) {
         {
           open_id: user.openId,
           name: user.name || "Athlete",
-          email: user.email || `${user.openId}@fittrack.local`,
+          email: user.email || `${user.openId}@100KG.local`,
           login_method: user.loginMethod || "custom",
           experience_level: user.experienceLevel || "beginner",
           role: user.role || (user.openId === ENV.ownerOpenId ? "admin" : "user"),
@@ -332,7 +332,7 @@ async function createNutritionEntry(userId, entry) {
   if (supabase) {
     try {
       await supabase.from("nutrition_entries").insert({
-        user_email: `user_${userId}@fittrack.local`,
+        user_email: `user_${userId}@100KG.local`,
         meal_type: entry.mealType,
         label: entry.label,
         hindi_name: entry.hindiName || null,
@@ -402,7 +402,7 @@ async function createWorkoutEntry(userId, entry) {
   if (supabase) {
     try {
       await supabase.from("workout_entries").insert({
-        user_email: `user_${userId}@fittrack.local`,
+        user_email: `user_${userId}@100KG.local`,
         title: entry.title,
         focus: entry.focus,
         movement_count: entry.movementCount,
@@ -462,7 +462,7 @@ async function createMetricEntry(userId, entry) {
   if (supabase) {
     try {
       await supabase.from("metric_entries").insert({
-        user_email: `user_${userId}@fittrack.local`,
+        user_email: `user_${userId}@100KG.local`,
         weight_kg: entry.weightKg,
         body_fat_percent: entry.bodyFatPercent || null,
         notes: entry.notes || null,
@@ -520,7 +520,7 @@ async function createGpsSession(userId, session) {
   if (supabase) {
     try {
       await supabase.from("gps_sessions").insert({
-        user_email: `user_${userId}@fittrack.local`,
+        user_email: `user_${userId}@100KG.local`,
         label: session.label,
         started_at: session.startedAt.toISOString(),
         ended_at: session.endedAt.toISOString(),
@@ -708,7 +708,7 @@ var SDKServer = class {
           "[Security] FATAL: JWT_SECRET environment variable is missing or too short. A secret of at least 16 characters is required."
         );
       }
-      secret = "fittrack_dev_fallback_secret_key_32bytes_minimum!!";
+      secret = "100KG_dev_fallback_secret_key_32bytes_minimum!!";
     }
     return new TextEncoder().encode(secret);
   }
@@ -1134,7 +1134,7 @@ function parseStoredRoute(routeJson) {
 }
 var appRouter = router({
   system: systemRouter,
-  health: publicProcedure.query(() => ({ ok: true, service: "fittrack-api", checkedAt: /* @__PURE__ */ new Date() })),
+  health: publicProcedure.query(() => ({ ok: true, service: "100KG-api", checkedAt: /* @__PURE__ */ new Date() })),
   auth: router({
     me: publicProcedure.query((opts) => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
@@ -1419,7 +1419,7 @@ async function findAvailablePort(startPort = 3e3) {
   throw new Error(`No available port found starting from ${startPort}`);
 }
 async function startServer() {
-  console.log("[FitTrack] Initializing server...");
+  console.log("[100KG] Initializing server...");
   const app = express2();
   const server = createServer(app);
   app.use(express2.json({ limit: "50mb" }));
