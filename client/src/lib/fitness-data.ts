@@ -205,7 +205,7 @@ export const baseMuscleDefinitions: Record<MuscleId, Omit<MuscleInfo, "score" | 
 export function getStoredRecoveryMap(): MuscleRecoveryMap {
   if (typeof window === "undefined") return {};
   try {
-    const raw = localStorage.getItem(getScopedKey(RECOVERY_STORAGE_KEY));
+    const raw = localStorage.getItem(getScopedKey(RECOVERY_STORAGE_KEY)) || localStorage.getItem(RECOVERY_STORAGE_KEY);
     if (raw) return JSON.parse(raw);
   } catch {}
   return {};
@@ -348,8 +348,82 @@ export function resetAllMuscleRecovery(): void {
   if (typeof window === "undefined") return;
   try {
     localStorage.removeItem(getScopedKey(RECOVERY_STORAGE_KEY));
+    localStorage.removeItem(RECOVERY_STORAGE_KEY);
     window.dispatchEvent(new CustomEvent("fittrack:recovery-update", { detail: { reset: true } }));
   } catch {}
+}
+
+/**
+ * Calculates overall body recovery telemetry directly from dynamic muscle states in the 3D Body Map
+ */
+export function getOverallBodymapReadiness(): {
+  score: number;
+  status: RecoveryStatus;
+  label: string;
+  color: string;
+  caption: string;
+  fatiguedCount: number;
+  recoveringCount: number;
+  freshCount: number;
+} {
+  const dynamicLib = getDynamicMuscleLibrary();
+  const muscles = Object.values(dynamicLib);
+  if (!muscles || muscles.length === 0) {
+    return {
+      score: 100,
+      status: "recovered",
+      label: "Fully Recovered",
+      color: "#c6ff3d",
+      caption: "All musculoskeletal chains primed & fully recovered.",
+      fatiguedCount: 0,
+      recoveringCount: 0,
+      freshCount: 10,
+    };
+  }
+
+  const scores = muscles.map((m) => (typeof m.score === "number" ? m.score : 100));
+  const avg = Math.round(scores.reduce((sum, s) => sum + s, 0) / scores.length);
+  const score = Math.max(0, Math.min(100, avg));
+
+  const fatigued = muscles.filter((m) => m.score < 65);
+  const recovering = muscles.filter((m) => m.score >= 65 && m.score < 80);
+  const fresh = muscles.filter((m) => m.score >= 80);
+
+  let status: RecoveryStatus = "recovered";
+  let label = "Fully Recovered";
+  let color = "#c6ff3d";
+
+  if (score < 65 || fatigued.length >= 3) {
+    status = "rest";
+    label = "Needs Rest";
+    color = "#ef4444";
+  } else if (score < 80 || fatigued.length > 0 || recovering.length >= 2) {
+    status = "recovering";
+    label = "Recovering";
+    color = "#f59e0b";
+  }
+
+  let caption = "All musculoskeletal chains primed & fully recovered.";
+  if (fatigued.length > 0) {
+    const names = fatigued.map((m) => m.label).slice(0, 2).join(", ");
+    const extra = fatigued.length > 2 ? ` +${fatigued.length - 2} more` : "";
+    caption = `High fatigue in ${names}${extra}. Prioritizing recovery.`;
+  } else if (recovering.length > 0) {
+    const names = recovering.map((m) => m.label).slice(0, 2).join(", ");
+    const extra = recovering.length > 2 ? ` +${recovering.length - 2} more` : "";
+    caption = `Active recovery in ${names}${extra}. Primed for moderate load.`;
+  }
+
+  return {
+    score,
+    status,
+    label,
+    color,
+    caption,
+    fatiguedCount: fatigued.length,
+    recoveringCount: recovering.length,
+    freshCount: fresh.length,
+  };
 }
 
 /**
