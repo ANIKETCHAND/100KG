@@ -5,6 +5,9 @@ import {
   Activity,
   ArrowRight,
   Award,
+  Check,
+  Copy,
+  ExternalLink,
   ChevronRight,
   Dumbbell,
   Fingerprint,
@@ -21,6 +24,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { saveAthleteProfile, isProfileConfigured, getScopedKey } from "@/lib/user-store";
 import { sanitizeText, sanitizeEmail, hashPassword } from "@/lib/sanitize";
 import { getSupabaseClient } from "@/lib/supabase";
+import { getGoogleClientId, saveGoogleClientId, isGoogleConfigured } from "@/lib/google-auth";
 import "./Landing.css";
 
 const motivatingQuotes = [
@@ -48,6 +52,7 @@ const motivatingQuotes = [
 
 // Production Google OAuth Client ID
 const GOOGLE_CLIENT_ID = "583335952268-9ibrvhstkajdn9ik9did17ml3pldijuk.apps.googleusercontent.com";
+const DEFAULT_GOOGLE_CLIENT_ID = GOOGLE_CLIENT_ID;
 
 export default function Landing() {
   const [, setLocation] = useLocation();
@@ -71,6 +76,9 @@ export default function Landing() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [googleSetupOpen, setGoogleSetupOpen] = useState(false);
+  const [customClientIdInput, setCustomClientIdInput] = useState(() => getGoogleClientId());
+  const [copiedOrigin, setCopiedOrigin] = useState<string | null>(null);
   const googleBtnRef = useRef<HTMLDivElement | null>(null);
 
   // Onboarding setup helper: checks if account already has a configured profile
@@ -109,7 +117,8 @@ export default function Landing() {
         const payload = JSON.parse(jsonPayload);
 
         // Security Validation: verify audience & issuer claims
-        if (payload?.aud && payload.aud !== GOOGLE_CLIENT_ID) {
+        const expectedAud = getGoogleClientId() || DEFAULT_GOOGLE_CLIENT_ID;
+        if (payload?.aud && payload.aud !== expectedAud) {
           console.warn("Security Alert: Google JWT audience mismatch.");
           toast.error("Security verification failed. Invalid token audience.");
           return;
@@ -154,7 +163,7 @@ export default function Landing() {
     if (g?.accounts?.oauth2) {
       try {
         const client = g.accounts.oauth2.initTokenClient({
-          client_id: GOOGLE_CLIENT_ID,
+          client_id: getGoogleClientId() || DEFAULT_GOOGLE_CLIENT_ID,
           scope: "openid profile email",
           callback: async (tokenResponse: any) => {
             if (tokenResponse && tokenResponse.access_token) {
@@ -585,54 +594,45 @@ export default function Landing() {
           </div>
 
           <div className="auth-form-stack">
-            {/* Google Authentication Button — hidden on localhost (origin_mismatch) */}
-            {typeof window !== "undefined" && window.location.hostname !== "localhost" ? (
-              <>
-                <button
-                  type="button"
-                  className="google-auth-btn"
-                  onClick={handleGoogleOAuthPopup}
-                >
-                  <svg className="google-icon" viewBox="0 0 24 24" width="18" height="18">
-                    <path
-                      fill="#4285F4"
-                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                    />
-                    <path
-                      fill="#34A853"
-                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                    />
-                    <path
-                      fill="#FBBC05"
-                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                    />
-                    <path
-                      fill="#EA4335"
-                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                    />
-                  </svg>
-                  <span>Continue with Google</span>
-                </button>
+            {/* Universal Google Authentication Button */}
+            <button
+              type="button"
+              className="google-auth-btn"
+              onClick={handleGoogleOAuthPopup}
+              disabled={isGoogleLoading}
+            >
+              {isGoogleLoading ? (
+                <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin mr-2" />
+              ) : (
+                <svg className="google-icon" viewBox="0 0 24 24" width="18" height="18">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+              )}
+              <span>{isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}</span>
+            </button>
 
-                <div ref={googleBtnRef} className="w-full flex justify-center empty:hidden" />
+            <div className="flex items-center justify-between px-1 text-[11px] font-mono text-[#8a9b89]">
+              <span className="flex items-center gap-1.5">
+                <span className={`w-2 h-2 rounded-full ${isGoogleConfigured() ? "bg-[#22c55e]" : "bg-[#f59e0b]"}`} />
+                {isGoogleConfigured() ? "Google OAuth Connected" : "OAuth Setup Needed"}
+              </span>
+              <button
+                type="button"
+                onClick={() => setGoogleSetupOpen(true)}
+                className="text-[#c6ff3d] hover:underline"
+              >
+                {isGoogleConfigured() ? "Manage Client ID" : "Configure Client ID"}
+              </button>
+            </div>
 
-                <div className="auth-divider">
-                  <span>Or sign in with email</span>
-                </div>
-              </>
-            ) : (
-              <div className="rounded-lg border border-[#2a3827] bg-[#0f1a0e]/80 px-4 py-3 text-center">
-                <p className="text-[12px] text-[#c6ff3d] font-bold font-['Space_Mono'] mb-1">
-                  ⚡ Localhost Mode
-                </p>
-                <p className="text-[11px] text-[#8fa88d] font-['Space_Mono'] leading-relaxed">
-                  Google Sign-In is disabled on <code className="text-white">localhost</code> due to OAuth origin restrictions.
-                  <br />Use <strong className="text-white">email + password</strong> below — it works instantly, no setup needed.
-                </p>
-              </div>
-            )}
+            <div ref={googleBtnRef} className="w-full flex justify-center empty:hidden" />
 
-
+            <div className="auth-divider">
+              <span>Or sign in with email</span>
+            </div>
 
             <form onSubmit={handleAuthSubmit} className="auth-form-stack">
               {authMode === "signup" && (
@@ -687,6 +687,107 @@ export default function Landing() {
                 {isSubmitting ? "Verifying..." : (authMode === "signin" ? "Sign In to Dashboard" : "Create Your Account")}
               </button>
             </form>
+          </div>
+        </DialogContent>
+            </Dialog>
+
+      {/* Google OAuth Setup & Configuration Dialog */}
+      <Dialog open={googleSetupOpen} onOpenChange={setGoogleSetupOpen}>
+        <DialogContent className="auth-dialog-card sm:max-w-[480px]">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold uppercase tracking-wider text-[#eef5eb] font-['Chakra_Petch'] flex items-center gap-2">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+              </svg>
+              Google OAuth Setup
+            </DialogTitle>
+            <DialogDescription className="text-xs text-[#8a9b89] font-['Space_Mono']">
+              To enable 1-click Google Sign-In, enter your Google Cloud OAuth 2.0 Client ID below.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4 pt-2">
+            <div className="rounded-lg border border-[#2a3827] bg-[#0c140c] p-3 text-xs font-mono space-y-2">
+              <p className="text-[#c6ff3d] font-bold">1. Authorized JavaScript Origins to copy:</p>
+              <div className="space-y-1.5">
+                {[
+                  "http://localhost:3000",
+                  "https://fit-repo.vercel.app",
+                ].map((origin) => (
+                  <div key={origin} className="flex items-center justify-between bg-black/40 px-2.5 py-1.5 rounded border border-white/5">
+                    <code className="text-white text-[11px]">{origin}</code>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(origin);
+                        setCopiedOrigin(origin);
+                        setTimeout(() => setCopiedOrigin(null), 2000);
+                        toast.success(`Copied ${origin} to clipboard`);
+                      }}
+                      className="text-[#8a9b89] hover:text-[#c6ff3d] flex items-center gap-1 text-[10px]"
+                    >
+                      {copiedOrigin === origin ? <Check size={12} className="text-[#22c55e]" /> : <Copy size={12} />}
+                      {copiedOrigin === origin ? "Copied" : "Copy"}
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-1 flex items-center justify-between">
+                <a
+                  href="https://console.cloud.google.com/apis/credentials"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[#c6ff3d] hover:underline flex items-center gap-1 text-[11px]"
+                >
+                  <ExternalLink size={12} />
+                  Open Google Cloud Console (Credentials)
+                </a>
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-mono text-[#8a9b89] uppercase tracking-wider">
+                Google Client ID
+              </label>
+              <input
+                type="text"
+                value={customClientIdInput}
+                onChange={(e) => setCustomClientIdInput(e.target.value)}
+                placeholder="1234567890-xxx.apps.googleusercontent.com"
+                className="w-full bg-[#0a100a] border border-[#2a3827] rounded-lg px-3 py-2 text-xs font-mono text-white placeholder-white/20 focus:border-[#c6ff3d] focus:outline-none"
+              />
+              <p className="text-[10px] text-[#6b7b6a] font-mono">
+                Saved instantly in browser storage. You can also define VITE_GOOGLE_CLIENT_ID in .env.
+              </p>
+            </div>
+
+            <div className="flex gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  saveGoogleClientId(customClientIdInput);
+                  setGoogleSetupOpen(false);
+                  toast.success("Google Client ID saved!");
+                  if (customClientIdInput.trim()) {
+                    setTimeout(() => handleGoogleOAuthPopup(), 400);
+                  }
+                }}
+                className="flex-1 py-2.5 bg-[#c6ff3d] text-black font-['Chakra_Petch'] font-bold uppercase tracking-wider rounded-lg text-xs hover:bg-[#b0f522] transition-colors"
+              >
+                Save & Sign In with Google
+              </button>
+              <button
+                type="button"
+                onClick={() => setGoogleSetupOpen(false)}
+                className="px-4 py-2.5 bg-white/5 text-[#8a9b89] font-['Space_Mono'] rounded-lg text-xs hover:bg-white/10"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
