@@ -47,7 +47,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
         {
           open_id: user.openId,
           name: user.name || "Athlete",
-          email: user.email || `${user.openId}@fittrack.local`,
+          email: user.email || `${user.openId}@100KG.local`,
           login_method: user.loginMethod || "custom",
           experience_level: user.experienceLevel || "beginner",
           role: user.role || (user.openId === ENV.ownerOpenId ? "admin" : "user"),
@@ -178,7 +178,7 @@ export async function createNutritionEntry(
   if (supabase) {
     try {
       await supabase.from("nutrition_entries").insert({
-        user_email: `user_${userId}@fittrack.local`,
+        user_email: `user_${userId}@100KG.local`,
         meal_type: entry.mealType,
         label: entry.label,
         hindi_name: entry.hindiName || null,
@@ -275,7 +275,7 @@ export async function createWorkoutEntry(
   if (supabase) {
     try {
       await supabase.from("workout_entries").insert({
-        user_email: `user_${userId}@fittrack.local`,
+        user_email: `user_${userId}@100KG.local`,
         title: entry.title,
         focus: entry.focus,
         movement_count: entry.movementCount,
@@ -344,7 +344,7 @@ export async function createMetricEntry(userId: number, entry: { weightKg: numbe
   if (supabase) {
     try {
       await supabase.from("metric_entries").insert({
-        user_email: `user_${userId}@fittrack.local`,
+        user_email: `user_${userId}@100KG.local`,
         weight_kg: entry.weightKg,
         body_fat_percent: entry.bodyFatPercent || null,
         notes: entry.notes || null,
@@ -411,7 +411,7 @@ export async function createGpsSession(userId: number, session: GpsSessionInput)
   if (supabase) {
     try {
       await supabase.from("gps_sessions").insert({
-        user_email: `user_${userId}@fittrack.local`,
+        user_email: `user_${userId}@100KG.local`,
         label: session.label,
         started_at: session.startedAt.toISOString(),
         ended_at: session.endedAt.toISOString(),

@@ -1,22 +1,22 @@
-# 🏆 FitTrack — Complete Technical Project Report
+# 🏆 100KG — Complete Technical Project Report
 ### Intelligent Athletic Performance Operating System
 **Smart India Hackathon 2026 (SIH 2026) Official Technical Deliverable**
 
 ---
 
 ## 📋 Document Metadata
-* **Project Name**: FitTrack Performance OS
+* **Project Name**: 100KG Performance OS
 * **Current Version**: 2.0.0 (Pre-Hackathon Release)
 * **Deployment Status**: Pre-Hackathon Development Phase (Intentionally undeployed prior to hackathon kickoff to comply with competition regulations; local build verified)
 * **GitHub Monorepo**: [https://github.com/ANIKETCHAND/fit.git](https://github.com/ANIKETCHAND/fit.git)
-* **Engineering Team**: FitTrack Core Team
+* **Engineering Team**: 100KG Core Team
 * **Primary Target Demographic**: Indian fitness enthusiasts, students, athletes, desk workers, and citizens combating sedentary lifestyle disorders.
 
 ---
 
 ## 1. Executive Summary
 
-FitTrack is an all-in-one, browser-first, cloud-synchronized **Athletic Performance Operating System**. It bridges the critical divide in modern fitness technology by combining:
+100KG is an all-in-one, browser-first, cloud-synchronized **Athletic Performance Operating System**. It bridges the critical divide in modern fitness technology by combining:
 1. **Interactive 3D Anatomy & Muscle Recovery Studio** powered by WebGL and Three.js.
 2. **Localized Indian Nutrition Lab** tracking regional meals (*Roti, Dal, Paneer, Sabzi, Biryani, Idli/Dosa*) alongside raw pantry ingredients with automated BMR/TDEE calibrations.
 3. **Rexi AI Conversational Coach** powered by Google Gemini 1.5 Flash, grounded in real-time biometric telemetry.
@@ -35,7 +35,7 @@ FitTrack is an all-in-one, browser-first, cloud-synchronized **Athletic Performa
 * **Youth Lifestyle Disease Surge**: Non-communicable diseases (Type-2 Diabetes, hypertension, metabolic syndrome, and posture disorders) are escalating among sedentary urban youth.
 
 ### 2.2 Alignment with National Initiatives
-FitTrack aligns directly with Government of India health frameworks:
+100KG aligns directly with Government of India health frameworks:
 * **Fit India Movement**: Encouraging daily physical exercise, active walking/running, and habit continuity across all age groups.
 * **Khelo India**: Promoting structured progressive overload, physical conditioning, and athletic talent tracking.
 * **Preventative Healthcare**: Lowering long-term public healthcare expenditure by promoting cardiovascular health, lean muscle preservation, and nutritional literacy.
@@ -59,7 +59,7 @@ FitTrack aligns directly with Government of India health frameworks:
 ```
 
 ### 3.1 Basal Metabolic Rate (BMR) Formulation
-FitTrack computes baseline resting metabolic expenditure using the **Mifflin-St Jeor Formula**, recognized as the most accurate clinical standard for predicting resting metabolic rate in adults:
+100KG computes baseline resting metabolic expenditure using the **Mifflin-St Jeor Formula**, recognized as the most accurate clinical standard for predicting resting metabolic rate in adults:
 
 $$\text{BMR}_{\text{male}} = (10 \times m_{\text{kg}}) + (6.25 \times h_{\text{cm}}) - (5 \times a_{\text{years}}) + 5$$
 
@@ -164,7 +164,7 @@ $$c = 2 \cdot \text{atan2}\left(\sqrt{a}, \sqrt{1-a}\right)$$
 $$d = R_{\text{earth}} \cdot c \quad \text{where } R_{\text{earth}} \approx 6,371.0\text{ km}$$
 
 #### Velocity Gating & Noise Filter
-Smartphone GPS receivers generate multi-path bounce errors. FitTrack applies a two-stage filter:
+Smartphone GPS receivers generate multi-path bounce errors. 100KG applies a two-stage filter:
 1. **Accuracy Threshold**: If GPS horizontal accuracy uncertainty $\sigma_{\text{accuracy}} > 25\text{ meters}$, the point is dropped.
 2. **Kinematic Velocity Gating**: If calculated instantaneous speed between successive points exceeds running limits:
    $$v_{\text{instant}} = \frac{\Delta d}{\Delta t} > 35\text{ km/h} \quad (9.72\text{ m/s})$$
@@ -188,7 +188,7 @@ $$\text{Pace} = \frac{\Delta t_{\text{seconds}} / 60}{\Delta d_{\text{km}}} \qua
 ```
 
 ### 4.1 React 19 Concurrent Rendering
-FitTrack leverages **React 19** concurrent features. Three.js canvas WebGL render loops run asynchronously alongside DOM reconciliation, ensuring that 60 FPS 3D animations never block form interactions or tab navigation.
+100KG leverages **React 19** concurrent features. Three.js canvas WebGL render loops run asynchronously alongside DOM reconciliation, ensuring that 60 FPS 3D animations never block form interactions or tab navigation.
 
 ### 4.2 3D Anatomy & Kinetic Recovery Studio
 * **Interactive Anatomy Mesh**: Renders a complete anatomical human model in Three.js with individual raycaster hit-testing for muscle groups.
@@ -433,13 +433,13 @@ To prevent multi-user collisions on shared devices and preserve privacy:
 
 | Entity | Scoped Storage Key Pattern | Serialized Structure |
 | :--- | :--- | :--- |
-| **Athlete Profile** | `fittrack_profile__<email>` | `{ name, email, location, focus, photoDataUrl }` |
-| **Calibration Settings** | `fittrack_calibration__<email>` | `{ weightKg, heightCm, age, sex, activityLevel, goalKcal, ... }` |
-| **Daily Meals (Today)** | `fittrack_logged_nutrition_today__<email>` | `[{ id, name, kcal, p, c, f, meal, time }]` |
-| **Workout History** | `fittrack_workout_logs__<email>` | `[{ title, focus, movementCount, volumeKg, completedAt }]` |
-| **GPS History** | `fittrack_gps_sessions__<email>` | `[{ id, distanceKm, duration, avgPace, routePoints }]` |
-| **Daily Streak** | `fittrack-daily-streak__<email>` | `{ count, lastLoggedDate, highestStreak }` |
-| **Hashed Credential** | `fittrack_cred_hash__<email>` | SHA-256 hex string digest |
+| **Athlete Profile** | `100KG_profile__<email>` | `{ name, email, location, focus, photoDataUrl }` |
+| **Calibration Settings** | `100KG_calibration__<email>` | `{ weightKg, heightCm, age, sex, activityLevel, goalKcal, ... }` |
+| **Daily Meals (Today)** | `100KG_logged_nutrition_today__<email>` | `[{ id, name, kcal, p, c, f, meal, time }]` |
+| **Workout History** | `100KG_workout_logs__<email>` | `[{ title, focus, movementCount, volumeKg, completedAt }]` |
+| **GPS History** | `100KG_gps_sessions__<email>` | `[{ id, distanceKm, duration, avgPace, routePoints }]` |
+| **Daily Streak** | `100KG-daily-streak__<email>` | `{ count, lastLoggedDate, highestStreak }` |
+| **Hashed Credential** | `100KG_cred_hash__<email>` | SHA-256 hex string digest |
 
 ---
 
@@ -494,7 +494,7 @@ For standard email/password authentication, passwords are cryptographically hash
 ```typescript
 export async function hashPassword(password: string): Promise<string> {
   const encoder = new TextEncoder();
-  const data = encoder.encode(password + "_fittrack_salt_2026");
+  const data = encoder.encode(password + "_100KG_salt_2026");
   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
@@ -515,7 +515,7 @@ When users sign in via Google OAuth2, the JWT token payload is inspected:
 sequenceDiagram
     autonumber
     actor Athlete as Athlete (User)
-    participant UI as FitTrack Interface
+    participant UI as 100KG Interface
     participant Telemetry as Telemetry Aggregator
     participant RexiEngine as Rexi Context Engine
     participant Gemini as Google Gemini 1.5 Flash API
@@ -553,7 +553,7 @@ An automated end-to-end user simulation was executed on the production build via
 | Test Step | Target Feature | Automated Assertion Result | Status |
 | :---: | :--- | :--- | :---: |
 | **01** | Landing Page Load | Hero section, quote ticker, and CTA render cleanly | ✅ PASS |
-| **02** | User Registration | Created athlete account (`athlete.sih.<id>@fittrack.in`), hashed password | ✅ PASS |
+| **02** | User Registration | Created athlete account (`athlete.sih.<id>@100KG.in`), hashed password | ✅ PASS |
 | **03** | Rexi Onboarding Modal | 3D mascot, welcome bubble, and Intermediate tier selection verified | ✅ PASS |
 | **04** | Profile Calibration | Calibrated BMR, TDEE, weight ($72\text{ kg}$), height ($175\text{ cm}$), and saved settings | ✅ PASS |
 | **05** | Home Dashboard | Rendered 3D Orbital Scene ($82/100$ readiness), training rhythm, and nutrition ledger | ✅ PASS |
@@ -577,4 +577,4 @@ An automated end-to-end user simulation was executed on the production build via
 
 ## 10. Conclusion
 
-FitTrack demonstrates the power of combining modern web standards, hardware-accelerated 3D graphics, localized domain knowledge, and generative artificial intelligence. By eliminating cost barriers, localizing nutritional tracking for the Indian diet, and grounding AI coaching in real-time physiological telemetry, FitTrack stands as a production-grade, scalable platform ready for national impact at the **Smart India Hackathon 2026**.
+100KG demonstrates the power of combining modern web standards, hardware-accelerated 3D graphics, localized domain knowledge, and generative artificial intelligence. By eliminating cost barriers, localizing nutritional tracking for the Indian diet, and grounding AI coaching in real-time physiological telemetry, 100KG stands as a production-grade, scalable platform ready for national impact at the **Smart India Hackathon 2026**.

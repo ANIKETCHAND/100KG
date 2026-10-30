@@ -1,9 +1,9 @@
-# FitTrack 🏋️ — Performance Operating System
+# 100KG 🏋️ — Performance Operating System
 > **Smart India Hackathon 2026 (SIH 2026) Submission**  
 > **Deployment Status**: Pre-Hackathon Phase (Undeployed in compliance with hackathon evaluation guidelines; local build verified)  
 > **GitHub Monorepo**: [https://github.com/ANIKETCHAND/fit.git](https://github.com/ANIKETCHAND/fit.git)
 
-FitTrack is a modern, high-performance athletic operating system built with **React 19, TypeScript, Vite, Supabase PostgreSQL, and Google Gemini 1.5 Flash**. It combines 3D interactive human anatomy, localized Indian nutritional tracking, real-time GPS route telemetry, and conversational AI coaching.
+100KG is a modern, high-performance athletic operating system built with **React 19, TypeScript, Vite, Supabase PostgreSQL, and Google Gemini 1.5 Flash**. It combines 3D interactive human anatomy, localized Indian nutritional tracking, real-time GPS route telemetry, and conversational AI coaching.
 
 ---
 
@@ -90,7 +90,7 @@ Complete technical and architectural documentation has been prepared and indexed
 
 ## 🔒 Security & Privacy
 
-FitTrack adheres strictly to data security best practices:
+100KG adheres strictly to data security best practices:
 * **Database Tenant Isolation**: Enforced by PostgreSQL RLS (`public.current_athlete_email()`).
 * **Cryptographic Hash Protection**: All custom passwords hashed using client-side SHA-256 before local persistence.
 * **Offline Resilience**: Biometric metrics and workout logs are safely preserved in browser local storage and asynchronously synced upon connection.

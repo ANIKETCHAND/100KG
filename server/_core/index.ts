@@ -30,7 +30,7 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 }
 
 async function startServer() {
-  console.log("[FitTrack] Initializing server...");
+  console.log("[100KG] Initializing server...");
   const app = express();
   const server = createServer(app);
   // Configure body parser with larger size limit for file uploads

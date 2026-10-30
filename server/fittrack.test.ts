@@ -1,5 +1,5 @@
 /**
- * FitTrack Comprehensive Master Unit Test Suite
+ * 100KG Comprehensive Master Unit Test Suite
  * Consolidates activity router, auth logout, date calculations, Zod fitness contracts,
  * and frontend navigation integrity tests.
  */
@@ -33,7 +33,7 @@ import { appRouter } from "./routers";
 
 const user = {
   id: 42,
-  openId: "fittrack-test-athlete",
+  openId: "100KG-test-athlete",
   email: "athlete@example.com",
   name: "Test Athlete",
   loginMethod: "manus",
@@ -55,7 +55,7 @@ function createContext(): TrpcContext {
 // 1. ACTIVITY ROUTER TESTS
 // =============================================================================
 
-describe("FitTrack activity router", () => {
+describe("100KG activity router", () => {
   beforeEach(() => vi.clearAllMocks());
 
   it("persists nutrition, biometric, and workout signals under the authenticated athlete", async () => {
@@ -196,7 +196,7 @@ describe("GithubContributionGraph Date Logic", () => {
 // 4. FITNESS CONTRACT VALIDATION TESTS
 // =============================================================================
 
-describe("FitTrack activity contracts", () => {
+describe("100KG activity contracts", () => {
   it("accepts a completed GPS route with valid ordered telemetry", () => {
     const startedAt = new Date("2026-08-21T06:00:00.000Z");
     const result = gpsSessionInput.safeParse({
@@ -252,7 +252,7 @@ describe("FitTrack activity contracts", () => {
 const projectRoot = resolve(import.meta.dirname, "..");
 const readSource = (relativePath: string) => readFileSync(resolve(projectRoot, relativePath), "utf8");
 
-describe("FitTrack navigation and activity frontend contracts", () => {
+describe("100KG navigation and activity frontend contracts", () => {
   it("keeps every sidebar destination available after full-stack upgrades", () => {
     const sidebar = readSource("client/src/components/navigation/Sidebar.tsx");
     ["/", "/exercise-library", "/log-food", "/log-weight", "/gps", "/achievements", "/notifications", "/profile", "/settings", "/support"].forEach((path) => {
@@ -285,7 +285,7 @@ describe("FitTrack navigation and activity frontend contracts", () => {
 // 6. DYNAMIC MUSCLE RECOVERY ENGINE & MATHEMATICAL TELEMETRY TESTS
 // =============================================================================
 
-describe("FitTrack dynamic muscle recovery engine", () => {
+describe("100KG dynamic muscle recovery engine", () => {
   it("implements the asymptotic recovery curve S(t) = S0 + (100 - S0)(1 - e^(-t / tau))", () => {
     const s0 = 35;
     const tau = 48;
@@ -319,9 +319,9 @@ describe("FitTrack dynamic muscle recovery engine", () => {
     expect(fitnessData).toContain("resetAllMuscleRecovery");
 
     // Dynamic recovery events & live updates
-    expect(bodyMap).toContain("fittrack:recovery-update");
+    expect(bodyMap).toContain("100KG:recovery-update");
     expect(bodyMap).toContain("Reset to 100% (Fresh)");
-    expect(bodyScene).toContain("fittrack:recovery-update");
+    expect(bodyScene).toContain("100KG:recovery-update");
     expect(bodyScene).toContain("recoveryTick");
     expect(muscleInfo).toContain("Launch");
     expect(muscleInfo).toContain("Simulate 4 Completed Sets");
@@ -329,7 +329,7 @@ describe("FitTrack dynamic muscle recovery engine", () => {
     // Live workout set recording
     expect(logWorkout).toContain("recordLiveSetProgress");
     expect(logWorkout).toContain("recordMuscleWorkout");
-    expect(logWorkout).toContain("fittrack-staged-muscle");
+    expect(logWorkout).toContain("100KG-staged-muscle");
     expect(startSession).toContain("recordMuscleWorkout");
   });
 });
@@ -338,7 +338,7 @@ describe("FitTrack dynamic muscle recovery engine", () => {
 // 7. AUDIO CUE SYNTHESIS & ALARM / NOTIFICATION TESTS
 // =============================================================================
 
-describe("FitTrack audio cue synthesis & alarm notification wiring", () => {
+describe("100KG audio cue synthesis & alarm notification wiring", () => {
   it("verifies audio engine exports and zero-dependency synthesis contracts", () => {
     const audioCueSource = readSource("client/src/lib/audio-cue.ts");
     const userStoreSource = readSource("client/src/lib/user-store.ts");

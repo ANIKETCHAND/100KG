@@ -161,7 +161,7 @@ class SDKServer {
           "[Security] FATAL: JWT_SECRET environment variable is missing or too short. A secret of at least 16 characters is required."
         );
       }
-      secret = "fittrack_dev_fallback_secret_key_32bytes_minimum!!";
+      secret = "100KG_dev_fallback_secret_key_32bytes_minimum!!";
     }
     return new TextEncoder().encode(secret);
   }

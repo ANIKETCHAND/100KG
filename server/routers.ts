@@ -13,7 +13,7 @@ function parseStoredRoute(routeJson: string) {
 
 export const appRouter = router({
   system: systemRouter,
-  health: publicProcedure.query(() => ({ ok: true, service: "fittrack-api" as const, checkedAt: new Date() })),
+  health: publicProcedure.query(() => ({ ok: true, service: "100KG-api" as const, checkedAt: new Date() })),
   auth: router({
     me: publicProcedure.query((opts) => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
