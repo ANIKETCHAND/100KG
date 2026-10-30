@@ -216,7 +216,7 @@ export default function Profile() {
     <Sidebar />
     <main className="profile-main">
       <header className="profile-topbar">
-        <div className="profile-heading"><div className="header-wordmark"><div className="brand-logo-icon" style={{ width: 26, height: 26, marginRight: 6, display: "flex", alignItems: "center", justifyContent: "center" }}><Activity size={15} /></div><strong>FIT<span>TRACK</span></strong></div><div><span className="eyebrow">Activity & Contributions</span><h1>{athlete.name.split(" ")[0]}'s <em>contribution ledger.</em></h1></div></div>
+        <div className="profile-heading"><div className="header-wordmark"><div className="brand-logo-icon" style={{ width: 26, height: 26, marginRight: 6, display: "flex", alignItems: "center", justifyContent: "center" }}><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12h4l3-9 4 18 3-9h6"/></svg></div><strong>100<span>KG</span></strong></div><div><span className="eyebrow">Activity & Contributions</span><h1>{athlete.name.split(" ")[0]}'s <em>contribution ledger.</em></h1></div></div>
         <div className="profile-top-actions"><button className="icon-button" aria-label="Notifications" onClick={() => setLocation("/notifications")}><Bell size={19} /><b /></button><button className="avatar-button profile-avatar" aria-label="Open athlete profile" onClick={() => setLocation("/settings")}>{athlete.photoDataUrl ? <img src={athlete.photoDataUrl} alt="" /> : initials(athlete.name)}<ChevronDown size={14} /></button></div>
       </header>
 

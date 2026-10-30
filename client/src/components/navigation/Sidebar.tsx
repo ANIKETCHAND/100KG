@@ -91,7 +91,12 @@ export function Sidebar() {
           onClick={() => route("/overview")}
           title="100KG Performance"
         >
-          <span className="editorial-wordmark">100KG</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <div className="brand-logo-icon" style={{ width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(198,255,61,0.15)", border: "1px solid rgba(198,255,61,0.35)", borderRadius: "7px", color: "#c6ff3d", flexShrink: 0 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12h4l3-9 4 18 3-9h6"/></svg>
+            </div>
+            <span className="editorial-wordmark">100KG</span>
+          </div>
           {open && (
             <button
               className="editorial-close-mobile md:hidden"

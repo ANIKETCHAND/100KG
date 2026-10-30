@@ -384,10 +384,7 @@ export default function Landing() {
       <header className="landing-topbar">
         <div className="landing-topbar-left">
           <div className="landing-brand" onClick={() => setLocation("/")}>
-            <div className="brand-logo-icon">
-              <Activity size={18} />
-            </div>
-            <strong>FIT<span>TRACK</span></strong>
+            <div className="brand-logo-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12h4l3-9 4 18 3-9h6"/></svg></div><strong>100<span>KG</span></strong>
           </div>
 
           {/* Top Sign Up Action Button */}
