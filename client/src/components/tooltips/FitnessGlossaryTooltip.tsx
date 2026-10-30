@@ -1,4 +1,4 @@
-/* FitTrack: Interactive Beginner Fitness Glossary & Explain-This Tooltips */
+/* 100KG: Interactive Beginner Fitness Glossary & Explain-This Tooltips */
 import React, { useState } from "react";
 import { HelpCircle, Info, BookOpen, X, Sparkles, CheckCircle2, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -57,7 +57,7 @@ export const FITNESS_GLOSSARY: Record<string, GlossaryTerm> = {
     term: "1RM (One-Rep Max)",
     category: "training",
     shortDefinition: "The maximum amount of weight you can lift for a single repetition with clean form.",
-    inDepthExplanation: "1RM is a benchmark of maximal strength. Rather than testing true 1RMs (which carries high injury risk for beginners), FitTrack calculates your estimated 1RM using Brzycki and Epley equations based on your working sets.",
+    inDepthExplanation: "1RM is a benchmark of maximal strength. Rather than testing true 1RMs (which carries high injury risk for beginners), 100KG calculates your estimated 1RM using Brzycki and Epley equations based on your working sets.",
     beginnerExample: "Lifting 60kg for 10 reps yields an estimated 1RM of ~80kg.",
     proTip: "Calculate working weights as percentages of your 1RM (e.g. 70% 1RM for hypertrophy).",
   },
@@ -83,7 +83,7 @@ export function GlossaryTooltip({ termKey, children, inline = true }: GlossaryTo
     term: String(termKey),
     category: "training",
     shortDefinition: "Fitness training terminology concept.",
-    inDepthExplanation: "Click to learn more about this term in the FitTrack glossary.",
+    inDepthExplanation: "Click to learn more about this term in the 100KG glossary.",
     beginnerExample: "N/A",
     proTip: "Consistency is key.",
   };

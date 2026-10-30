@@ -84,7 +84,7 @@ export default function Notifications() {
 
   const handleTestNotification = () => {
     playNotificationSound("chime");
-    toast.info("🔔 Playing FitTrack notification chime");
+    toast.info("🔔 Playing 100KG notification chime");
   };
 
   const handleTestWorkoutAlarm = () => {

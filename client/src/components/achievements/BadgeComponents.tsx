@@ -1,4 +1,4 @@
-ï»¿/**
+/**
  * Kinetic Pixel Fitness Achievements: Consolidated Badge & Reward Components
  * Includes PixelBadge, BadgeShareSheet, and BadgeUnlockOverlay.
  */
@@ -79,7 +79,7 @@ export type BadgeShareSheetProps = {
 };
 
 const makeMessage = (achievement: Achievement) =>
-  `I unlocked the ${achievement.title} badge in FitTrack. ${achievement.description} Train the system. See the signal. #FitTrack #TrainTheSignal`;
+  `I unlocked the ${achievement.title} badge in 100KG. ${achievement.description} Train the system. See the signal. #100KG #TrainTheSignal`;
 
 export function BadgeShareSheet({ achievement, onClose }: BadgeShareSheetProps) {
   const [message, setMessage] = useState(() => makeMessage(achievement));
@@ -93,13 +93,13 @@ export function BadgeShareSheet({ achievement, onClose }: BadgeShareSheetProps) 
   const copy = async () => {
     await navigator.clipboard?.writeText(message);
     setCopied(true);
-    toast("Achievement message copied â€” ready to post");
+    toast("Achievement message copied — ready to post");
   };
 
   const nativeShare = async () => {
     if (navigator.share) {
       try {
-        await navigator.share({ title: `${achievement.title} â€” FitTrack`, text: message });
+        await navigator.share({ title: `${achievement.title} — 100KG`, text: message });
       } catch {
         /* User cancellation needs no error state. */
       }
@@ -170,7 +170,7 @@ export function BadgeShareSheet({ achievement, onClose }: BadgeShareSheetProps) 
               target="_blank"
               rel="noreferrer"
             >
-              <ExternalLink size={13} />FitTrack Open Source Project
+              <ExternalLink size={13} />100KG Open Source Project
             </a>
           </div>
         </div>

@@ -449,7 +449,7 @@ export default function GpsTracker() {
               <b>{isTracking ? "Movement in progress" : "Ready for route capture"}</b>
             </div>
           </div>
-          <p>FitTrack pinpoints your position in real-time. Use Locate Me to check GPS or Start Field Trace to record a workout.</p>
+          <p>100KG pinpoints your position in real-time. Use Locate Me to check GPS or Start Field Trace to record a workout.</p>
 
           <div className="gps-control-actions">
             {isTracking ? (

@@ -89,9 +89,9 @@ export function Sidebar() {
         <div
           className="editorial-brand-row"
           onClick={() => route("/overview")}
-          title="FitTrack Performance"
+          title="100KG Performance"
         >
-          <span className="editorial-wordmark">FITTRACK</span>
+          <span className="editorial-wordmark">100KG</span>
           {open && (
             <button
               className="editorial-close-mobile md:hidden"

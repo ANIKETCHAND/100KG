@@ -15,7 +15,7 @@ export function exportBadgeCertificate(achievement: Achievement) {
   ctx.fillStyle = "#121d13"; ctx.fillRect(104, 112, 278, 278); ctx.strokeStyle = lime; ctx.lineWidth = 7; ctx.strokeRect(104, 112, 278, 278);
   const px = (x: number, y: number, w: number, h: number, color = lime) => { ctx.fillStyle = color; ctx.fillRect(x, y, w, h); };
   px(178, 170, 50, 50); px(228, 170, 50, 50); px(278, 170, 50, 50, "#9eca77"); px(178, 220, 50, 50); px(278, 220, 50, 50); px(228, 270, 50, 50, "#dff5cf"); px(252, 320, 24, 35, "#a6d9ff");
-  ctx.font = "bold 29px monospace"; ctx.fillStyle = lime; ctx.fillText("FITTRACK / PERFORMANCE CERTIFICATE", 454, 159);
+  ctx.font = "bold 29px monospace"; ctx.fillStyle = lime; ctx.fillText("100KG / PERFORMANCE CERTIFICATE", 454, 159);
   ctx.font = "18px monospace"; ctx.fillStyle = smoke; ctx.fillText("ATHLETE SIGNAL ARCHIVE · VERIFIED MILESTONE", 456, 204);
   ctx.font = "bold 102px sans-serif"; ctx.fillStyle = bone; ctx.fillText(achievement.title.toUpperCase(), 454, 334);
   ctx.font = "27px sans-serif"; ctx.fillStyle = smoke; const words = achievement.description.split(" "); let line = ""; let y = 393; for (const word of words) { const test = `${line}${word} `; if (ctx.measureText(test).width > 950) { ctx.fillText(line, 456, y); y += 40; line = `${word} `; } else line = test; } ctx.fillText(line, 456, y);

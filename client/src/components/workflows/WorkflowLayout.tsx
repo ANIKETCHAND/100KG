@@ -24,7 +24,7 @@ export function WorkflowLayout({ kicker, title, detail, children }: WorkflowLayo
             <button className="back-button" onClick={() => setLocation("/overview")}>
               <ArrowLeft size={17} />Command center
             </button>
-            <div className="workflow-brand" aria-label="FitTrack" onClick={() => setLocation("/overview")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+            <div className="workflow-brand" aria-label="100KG" onClick={() => setLocation("/overview")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
               <div className="brand-logo-icon" style={{ width: 24, height: 24, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Activity size={14} />
               </div>

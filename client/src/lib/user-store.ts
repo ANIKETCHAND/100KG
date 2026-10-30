@@ -74,7 +74,7 @@ const getDefaultAthleteProfile = (): AthleteProfile => {
     if (cachedName && cachedName.trim()) {
       return {
         name: cachedName.trim(),
-        email: email && email !== "default_athlete" ? email : "athlete@fittrack.training",
+        email: email && email !== "default_athlete" ? email : "athlete@100kg.training",
         location: "Detecting location...",
         focus: "Hypertrophy & Strength",
       };
@@ -89,7 +89,7 @@ const getDefaultAthleteProfile = (): AthleteProfile => {
       .join(" ");
     return { name: cleanName, email: email, location: "Detecting location...", focus: "Hypertrophy & Strength" };
   }
-  return { name: "Athlete", email: "athlete@fittrack.training", location: "Detecting location...", focus: "Hypertrophy & Strength" };
+  return { name: "Athlete", email: "athlete@100kg.training", location: "Detecting location...", focus: "Hypertrophy & Strength" };
 };
 const defaultConnectedDevices: ConnectedDevice[] = [];
 const defaultCalibrationSettings = (): CalibrationSettings => {

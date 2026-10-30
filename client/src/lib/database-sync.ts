@@ -26,7 +26,7 @@ export interface DatabaseStats {
 }
 
 /**
- * 1. Export Complete FitTrack Athlete Database as JSON
+ * 1. Export Complete 100KG Athlete Database as JSON
  */
 export function exportAthleteDatabase(): void {
   try {
@@ -108,7 +108,7 @@ export function importAthleteDatabase(file: File): Promise<boolean> {
       try {
         const json = JSON.parse(event.target?.result as string) as DatabaseBackupPayload;
         if (!json.version) {
-          throw new Error("Invalid FitTrack backup file format.");
+          throw new Error("Invalid 100KG backup file format.");
         }
 
         if (json.calibration) {
@@ -156,7 +156,7 @@ export function getDatabaseStats(): DatabaseStats {
     let totalChars = 0;
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key && key.startsWith("fittrack")) {
+      if (key && key.startsWith("100KG")) {
         totalChars += (localStorage.getItem(key) || "").length;
       }
     }

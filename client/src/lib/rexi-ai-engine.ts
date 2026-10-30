@@ -220,7 +220,7 @@ export async function generateRexiChatResponse(
   const apiKey = getRuntimeGeminiKey();
 
   // 1. Official System Instruction for Gemini
-  const systemPrompt = `You are Rexi, the world-class athletic intelligence AI assistant embedded directly in the FitTrack Performance OS.
+  const systemPrompt = `You are Rexi, the world-class athletic intelligence AI assistant embedded directly in the 100KG Performance OS.
 You are a warm, highly motivating, scientifically grounded fitness coach, exercise biomechanist, and sports nutritionist.
 
 CURRENT DEVICE & TEMPORAL CONTEXT:
@@ -310,7 +310,7 @@ INSTRUCTIONS:
   // 4. Instant Fallback
   if (userQuery.toLowerCase().includes("date") || userQuery.toLowerCase().includes("today")) {
     return {
-      text: `Today is **${context.deviceDateString}** (${context.deviceTimeString}).\n\nYour FitTrack telemetry is live with **${context.remainingKcal} kcal** and **${context.remainingProtein}g protein** remaining for today!`,
+      text: `Today is **${context.deviceDateString}** (${context.deviceTimeString}).\n\nYour 100KG telemetry is live with **${context.remainingKcal} kcal** and **${context.remainingProtein}g protein** remaining for today!`,
       chips: generateContextualChips(userQuery, ""),
     };
   }

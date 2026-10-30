@@ -212,7 +212,7 @@ export default function Settings() {
               <Sparkles size={20} />
             </div>
             <div>
-              <b className="text-sm text-white block font-sans uppercase tracking-wide">Welcome to FitTrack Calibration</b>
+              <b className="text-sm text-white block font-sans uppercase tracking-wide">Welcome to 100KG Calibration</b>
               <p className="text-xs text-[#8b9c8a] mt-0.5">Let's calibrate your daily biometrics and nutrition targets to personalize your command center.</p>
             </div>
           </div>
