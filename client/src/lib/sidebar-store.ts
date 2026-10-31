@@ -1,28 +1,17 @@
-import { useState, useEffect } from "react";
+/**
+ * 100KG Performance OS — Sidebar Store Adapter
+ * Delegating to centralized reactive UI store.
+ */
 
-let globalSidebarOpen = false;
-const listeners = new Set<(open: boolean) => void>();
+import { uiStore, useUiStore } from "@/state/ui.store";
 
 export function useSidebar() {
-  const [open, setOpen] = useState(globalSidebarOpen);
-
-  useEffect(() => {
-    const handler = (state: boolean) => setOpen(state);
-    listeners.add(handler);
-    return () => {
-      listeners.delete(handler);
-    };
-  }, []);
-
-  const toggleSidebar = () => {
-    globalSidebarOpen = !globalSidebarOpen;
-    listeners.forEach((fn) => fn(globalSidebarOpen));
+  const { sidebarOpen, toggleSidebar, setSidebarOpen } = useUiStore();
+  return {
+    open: sidebarOpen,
+    toggleSidebar,
+    setSidebarOpen,
   };
-
-  const setSidebarOpen = (state: boolean) => {
-    globalSidebarOpen = state;
-    listeners.forEach((fn) => fn(globalSidebarOpen));
-  };
-
-  return { open, toggleSidebar, setSidebarOpen };
 }
+
+export { uiStore };

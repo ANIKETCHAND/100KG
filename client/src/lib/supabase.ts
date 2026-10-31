@@ -1,5 +1,6 @@
 /* FitTrack: Supabase Client & Configuration Engine */
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { env } from "@/config/env";
 
 export interface SupabaseConfig {
   url: string;
@@ -25,8 +26,8 @@ export function getSupabaseConfig(): SupabaseConfig {
     };
   }
 
-  const envUrl = (import.meta.env.VITE_SUPABASE_URL as string | undefined)?.trim();
-  const envKey = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined)?.trim();
+  const envUrl = env.SUPABASE_URL;
+  const envKey = env.SUPABASE_ANON_KEY;
 
   if (envUrl && envKey) {
     return {

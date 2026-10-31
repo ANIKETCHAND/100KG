@@ -1,7 +1,7 @@
-﻿import { ArrowRight, Utensils } from "lucide-react";
+import { ArrowRight, Utensils } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
-import { getAthleteProfile, getScopedKey } from "@/lib/user-store";
+import { getAthleteProfile, getCalibrationSettings, getScopedKey } from "@/lib/user-store";
 
 // =============================================================================
 // 1. WORKOUT RECOMMENDATION CARD
@@ -105,10 +105,10 @@ export function NutritionLedgerCard() {
       }
 
       setData({
-        energy: { current: Math.round(currentCals), target: 2400, unit: "kcal" },
-        protein: { current: Math.round(currentProtein), target: 150, unit: "g" },
-        carbs: { current: Math.round(currentCarbs), target: 270, unit: "g" },
-        fats: { current: Math.round(currentFats), target: 65, unit: "g" },
+        energy: { current: Math.round(currentCals), target: getCalibrationSettings().goalKcal || 2400, unit: "kcal" },
+        protein: { current: Math.round(currentProtein), target: getCalibrationSettings().goalProtein || 150, unit: "g" },
+        carbs: { current: Math.round(currentCarbs), target: getCalibrationSettings().goalCarbs || 270, unit: "g" },
+        fats: { current: Math.round(currentFats), target: getCalibrationSettings().goalFat || 65, unit: "g" },
       });
     } catch {
       // fallback

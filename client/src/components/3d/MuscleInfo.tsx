@@ -16,6 +16,7 @@ export function MuscleInfo({ muscle }: { muscle: MuscleInfoType }) {
 
   const handleLaunchRoutine = () => {
     try {
+      localStorage.setItem("100KG-staged-muscle", muscle.id);
       localStorage.setItem("fittrack-staged-muscle", muscle.id);
       if (muscle.exercises && muscle.exercises.length > 0) {
         localStorage.setItem("fittrack-staged-exercise", muscle.exercises[0].name);

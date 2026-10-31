@@ -1,5 +1,5 @@
 import { useState, useEffect, type ChangeEvent } from "react";
-import { Activity, ArrowRight, Calculator, Check, Dumbbell, Flame, Gauge, LoaderCircle, MapPin, Pencil, Save, Scale, Sparkles, Target, Upload, UserRound, Zap } from "lucide-react";
+import { Activity, ArrowRight, Calculator, Check, Database, Download, Dumbbell, Flame, Gauge, LoaderCircle, MapPin, Pencil, Save, Scale, Sparkles, Target, Upload, UserRound, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
@@ -19,6 +19,7 @@ import {
 } from "@/lib/user-store";
 import { autoSyncAthleteLocation, requestDeviceLocation } from "@/lib/location-resolver";
 import { SupabaseDatabaseCard } from "@/components/settings/SupabaseDatabaseCard";
+import { exportAthleteDatabase, exportWorkoutCsv } from "@/services/sync/database-backup.service";
 import "./CommandDeck.css";
 import "./ProfileInteractions.css";
 
@@ -397,6 +398,49 @@ export default function Settings() {
       {/* 🚀 Supabase Cloud Database Panel */}
       <div className="mt-8 mb-6">
         <SupabaseDatabaseCard />
+      </div>
+
+      {/* 📦 Data Portability & Local Backups */}
+      <div className="mt-6 mb-8 rounded-2xl border border-white/10 bg-[#111411]/90 p-6 backdrop-blur">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#c6ff3d]/15 border border-[#c6ff3d]/30 text-[#c6ff3d] flex items-center justify-center">
+              <Database size={20} />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-white flex items-center gap-2">
+                Data Portability & Local Backups
+              </h3>
+              <p className="text-xs text-[#8b9c8a] mt-0.5">
+                Export your biometrics, logs, and workout telemetry as raw JSON or spreadsheet-ready CSV.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                exportAthleteDatabase();
+                toast.success("Complete JSON backup downloaded.");
+              }}
+              className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white flex items-center gap-2 transition-colors"
+            >
+              <Download size={14} className="text-[#c6ff3d]" />
+              <span>Export JSON Backup</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                exportWorkoutCsv();
+                toast.success("Workout CSV downloaded.");
+              }}
+              className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white flex items-center gap-2 transition-colors"
+            >
+              <Download size={14} className="text-[#a6d9ff]" />
+              <span>Export Workouts CSV</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Edit Bio / Photo Dialog */}

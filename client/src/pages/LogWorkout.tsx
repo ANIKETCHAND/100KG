@@ -28,10 +28,10 @@ const defaultLifts = [
 
 export default function LogWorkout() {
   const [, setLocation] = useLocation();
-  const [staged] = useState(() => localStorage.getItem("fittrack-staged-exercise"));
+  const [staged] = useState(() => localStorage.getItem("100KG-staged-exercise") || localStorage.getItem("fittrack-staged-exercise"));
   const [stagedMuscle] = useState<MuscleId | null>(() => {
     try {
-      const sm = localStorage.getItem("fittrack-staged-muscle") as MuscleId | null;
+      const sm = (localStorage.getItem("100KG-staged-muscle") || localStorage.getItem("fittrack-staged-muscle")) as MuscleId | null;
       if (sm) return sm;
       if (staged) return focusToMuscleId(staged);
     } catch {}
@@ -107,7 +107,9 @@ export default function LogWorkout() {
   const volume = complete.reduce((total, index) => total + (index === 0 ? load * 28 : lifts[index].load * (index === 1 ? 30 : 36)), 0);
   const finish = () => {
     try {
+      localStorage.removeItem("100KG-staged-exercise");
       localStorage.removeItem("fittrack-staged-exercise");
+      localStorage.removeItem("100KG-staged-muscle");
       localStorage.removeItem("fittrack-staged-muscle");
     } catch { /* ignore */ }
     setLocation("/overview");

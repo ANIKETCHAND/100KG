@@ -1381,9 +1381,11 @@ export function BodyScene({ selected, onSelected }: BodySceneProps) {
 
   useEffect(() => {
     const handleUpdate = () => setRecoveryTick((t) => t + 1);
+    window.addEventListener("100KG:recovery-update", handleUpdate);
     window.addEventListener("fittrack:recovery-update", handleUpdate);
     window.addEventListener("storage", handleUpdate);
     return () => {
+      window.removeEventListener("100KG:recovery-update", handleUpdate);
       window.removeEventListener("fittrack:recovery-update", handleUpdate);
       window.removeEventListener("storage", handleUpdate);
     };

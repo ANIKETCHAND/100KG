@@ -1,15 +1,18 @@
 /**
  * 100KG Performance OS: Google OAuth 2.0 Integration Layer
- * Supports runtime environment variable (VITE_GOOGLE_CLIENT_ID) or user-configured client ID.
+ * Uses centralized typed environment configuration with custom client ID fallback.
  */
+
+import { env } from "@/config/env";
 
 export const getGoogleClientId = (): string => {
   if (typeof window === "undefined") return "";
-  const envId = (import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined)?.trim();
-  if (envId) return envId;
+  if (env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_ID.includes(".apps.googleusercontent.com")) {
+    return env.GOOGLE_CLIENT_ID;
+  }
   const customId = localStorage.getItem("fittrack_google_client_id")?.trim();
   if (customId) return customId;
-  return "";
+  return env.GOOGLE_CLIENT_ID || "";
 };
 
 export const saveGoogleClientId = (clientId: string): void => {

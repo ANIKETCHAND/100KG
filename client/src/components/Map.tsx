@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Crosshair, Loader2, Navigation, AlertCircle, Compass, Layers, KeyRound, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { env } from "@/config/env";
 
 declare global {
   interface Window {
@@ -37,7 +38,7 @@ export interface MapViewProps {
   onLocationFound?: (lat: number, lng: number, accuracy: number) => void;
 }
 
-const ENV_GOOGLE_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
+const ENV_GOOGLE_KEY = env.GOOGLE_MAPS_API_KEY || undefined;
 
 function loadGoogleMapsScript(key: string): Promise<void> {
   if (window.google?.maps) return Promise.resolve();

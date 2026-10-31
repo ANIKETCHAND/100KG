@@ -1,3 +1,8 @@
+/**
+ * 100KG Performance OS — Home Command Center
+ * Thin UI controller powered by reactive athlete & recovery stores.
+ */
+
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
@@ -8,61 +13,25 @@ import {
   NutritionLedgerCard,
   TrainingRhythmCard,
 } from "@/components/dashboard/DashboardCards";
-import { getAthleteProfile, getScopedKey } from "@/lib/user-store";
-import { getOverallBodymapReadiness } from "@/lib/fitness-data";
+import { useAthleteStore, useRecoveryStore } from "@/state";
+import { formatTelemetryTimestamp, getGreetingPeriod } from "@/utils/date";
 
 export default function Home() {
   const [, setLocation] = useLocation();
+  const { profile } = useAthleteStore();
+  const { readiness } = useRecoveryStore();
 
-  const getGreetingPeriod = () => {
-    const hour = new Date().getHours();
-    if (hour >= 5 && hour < 12) return "MORNING";
-    if (hour >= 12 && hour < 17) return "AFTERNOON";
-    if (hour >= 17 && hour < 21) return "EVENING";
-    return "NIGHT";
-  };
+  const [formattedTime, setFormattedTime] = useState(() => formatTelemetryTimestamp());
+  const [greetingWord, setGreetingWord] = useState(() => getGreetingPeriod());
 
-  const [greetingWord, setGreetingWord] = useState(getGreetingPeriod());
-  const [userName, setUserName] = useState(() => {
-    const profile = getAthleteProfile();
-    return (profile.name?.split(" ")[0] || "ATHLETE").toUpperCase();
-  });
-  const [readinessData, setReadinessData] = useState(() => getOverallBodymapReadiness());
-  const [formattedTime, setFormattedTime] = useState("");
+  const userName = (profile.name?.split(" ")[0] || "ATHLETE").toUpperCase();
 
   useEffect(() => {
-    const updateTimeAndGreeting = () => {
-      const now = new Date();
-      const day = now.toLocaleDateString("en-US", { weekday: "long" }).toUpperCase();
-      const time = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true });
-      setFormattedTime(`${day} • ${time}`);
+    const timer = setInterval(() => {
+      setFormattedTime(formatTelemetryTimestamp());
       setGreetingWord(getGreetingPeriod());
-      setReadinessData(getOverallBodymapReadiness());
-
-      const profile = getAthleteProfile();
-      if (profile.name && profile.name.trim()) {
-        const first = profile.name.trim().split(" ")[0];
-        setUserName(first.toUpperCase());
-      }
-    };
-
-    updateTimeAndGreeting();
-
-    const handleRecoveryUpdate = () => {
-      setReadinessData(getOverallBodymapReadiness());
-    };
-
-    window.addEventListener("fittrack:recovery-update", handleRecoveryUpdate);
-    window.addEventListener("storage", handleRecoveryUpdate);
-    window.addEventListener("focus", handleRecoveryUpdate);
-    const interval = setInterval(updateTimeAndGreeting, 10000);
-
-    return () => {
-      window.removeEventListener("fittrack:recovery-update", handleRecoveryUpdate);
-      window.removeEventListener("storage", handleRecoveryUpdate);
-      window.removeEventListener("focus", handleRecoveryUpdate);
-      clearInterval(interval);
-    };
+    }, 15000);
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -75,7 +44,7 @@ export default function Home() {
           {/* Left Hero Column: Typography & Actions */}
           <div className="editorial-hero-left">
             <div className="editorial-timestamp">
-              {formattedTime || "TUESDAY • 01:16 PM"}
+              {formattedTime}
             </div>
 
             <h1 className="editorial-greeting-title">
@@ -104,7 +73,15 @@ export default function Home() {
             {/* Score & Telemetry Indicator */}
             <div className="editorial-score-block">
               <div className="editorial-score-badge">
-                <span className="score-number" style={{ color: readinessData.color, textShadow: `0 0 20px ${readinessData.color}59` }}>{readinessData.score}</span>
+                <span
+                  className="score-number"
+                  style={{
+                    color: readiness.color,
+                    textShadow: `0 0 20px ${readiness.color}59`,
+                  }}
+                >
+                  {readiness.score}
+                </span>
                 <div className="score-denom">
                   <span className="denom-val">/ 100</span>
                   <span className="denom-label">READINESS</span>
@@ -115,12 +92,12 @@ export default function Home() {
 
           {/* Right Hero Column: 3D Orbital Readiness Form */}
           <div className="editorial-hero-right">
-            <OrbitalReadinessScene score={readinessData.score} />
+            <OrbitalReadinessScene score={readiness.score} />
           </div>
         </section>
 
-        {/* BOTTOM 3-CARD TELEMETRY GRID */}
-        <section className="editorial-bottom-grid">
+        {/* 3-COLUMN METRIC WIDGETS */}
+        <section className="editorial-cards-grid">
           <WorkoutRecommendationCard />
           <NutritionLedgerCard />
           <TrainingRhythmCard />

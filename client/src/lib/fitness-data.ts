@@ -317,6 +317,7 @@ export function recordMuscleWorkout(
     };
 
     localStorage.setItem(getScopedKey(RECOVERY_STORAGE_KEY), JSON.stringify(map));
+    window.dispatchEvent(new CustomEvent("100KG:recovery-update", { detail: { muscleId, map } }));
     window.dispatchEvent(new CustomEvent("fittrack:recovery-update", { detail: { muscleId, map } }));
   } catch (err) {
     console.error("Failed to record muscle recovery:", err);
@@ -349,6 +350,7 @@ export function resetAllMuscleRecovery(): void {
   try {
     localStorage.removeItem(getScopedKey(RECOVERY_STORAGE_KEY));
     localStorage.removeItem(RECOVERY_STORAGE_KEY);
+    window.dispatchEvent(new CustomEvent("100KG:recovery-update", { detail: { reset: true } }));
     window.dispatchEvent(new CustomEvent("fittrack:recovery-update", { detail: { reset: true } }));
   } catch {}
 }
