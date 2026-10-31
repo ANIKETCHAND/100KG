@@ -715,6 +715,7 @@ export default function Landing() {
               <div className="space-y-1.5">
                 {[
                   "http://localhost:3000",
+                  "https://100kg-app.vercel.app",
                   "https://fit-repo.vercel.app",
                 ].map((origin) => (
                   <div key={origin} className="flex items-center justify-between bg-black/40 px-2.5 py-1.5 rounded border border-white/5">
