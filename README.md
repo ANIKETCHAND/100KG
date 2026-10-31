@@ -1,7 +1,8 @@
 # 100KG 🏋️ — Performance Operating System
 > **Smart India Hackathon 2026 (SIH 2026) Submission**  
 > **Deployment Status**: Pre-Hackathon Phase (Undeployed in compliance with hackathon evaluation guidelines; local build verified)  
-> **GitHub Monorepo**: [https://github.com/ANIKETCHAND/fit.git](https://github.com/ANIKETCHAND/fit.git)
+> **GitHub Repository**: [https://github.com/ANIKETCHAND/100KG](https://github.com/ANIKETCHAND/100KG)  
+> **Live Production**: [https://100-kg.vercel.app](https://100-kg.vercel.app)
 
 100KG is a modern, high-performance athletic operating system built with **React 19, TypeScript, Vite, Supabase PostgreSQL, and Google Gemini 1.5 Flash**. It combines 3D interactive human anatomy, localized Indian nutritional tracking, real-time GPS route telemetry, and conversational AI coaching.
 

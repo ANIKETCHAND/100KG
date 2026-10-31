@@ -714,8 +714,9 @@ export default function Landing() {
               <p className="text-[#c6ff3d] font-bold">1. Authorized JavaScript Origins to copy:</p>
               <div className="space-y-1.5">
                 {[
-                  "http://localhost:3000",
+                  "https://100-kg.vercel.app",
                   "https://100kg-app.vercel.app",
+                  "http://localhost:3000",
                   "https://fit-repo.vercel.app",
                 ].map((origin) => (
                   <div key={origin} className="flex items-center justify-between bg-black/40 px-2.5 py-1.5 rounded border border-white/5">
